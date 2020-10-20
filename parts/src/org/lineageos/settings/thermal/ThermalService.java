@@ -36,18 +36,13 @@ public class ThermalService extends Service {
 
     private String mPreviousApp;
     private ThermalUtils mThermalUtils;
+    private IActivityManager mIActivityManager;
 
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (Intent.ACTION_SCREEN_ON.equals(action)) {
-                mHandler.postDelayed(mActivityRunnable, 500);
-            } else {
-                mHandler.removeCallbacks(mActivityRunnable);
-                mPreviousApp = "";
-                mThermalUtils.setDefaultThermalProfile();
-            }
+            mPreviousApp = "";
+            mThermalUtils.setDefaultThermalProfile();
         }
     };
 
@@ -60,6 +55,7 @@ public class ThermalService extends Service {
             // Do nothing
         }
         mThermalUtils = new ThermalUtils(this);
+        mIActivityManager = ActivityManager.getService();
         registerReceiver();
         super.onCreate();
     }
@@ -86,8 +82,7 @@ public class ThermalService extends Service {
         @Override
         public void onTaskStackChanged() {
             try {
-                final ActivityManager.StackInfo focusedStack =
-                        ActivityTaskManager.getService().getFocusedStackInfo();
+                final StackInfo focusedStack = mIActivityManager.getFocusedStackInfo();
                 if (focusedStack != null && focusedStack.topActivity != null) {
                     ComponentName taskComponentName = focusedStack.topActivity;
                     String foregroundApp = taskComponentName.getPackageName();
