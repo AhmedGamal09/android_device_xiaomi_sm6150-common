@@ -1,2 +1,6 @@
 # For zram writeback
 allow kernel per_boot_file:file r_file_perms;
+
+allow kernel vendor_firmware_file:lnk_file read;
+allow kernel vendor_firmware_file:file r_file_perms;
+allow kernel vendor_firmware_file:lnk_file read;
