@@ -407,7 +407,7 @@ vendor/lib/libsmwrapper.so
 vendor/lib/libgcs-calwrapper.so
 vendor/lib/liblistensoundmodel2.so
 
-# Media from LA.UM.9.1.r1-10200-SMxxx0.0
+# Media
 vendor/bin/hw/vendor.qti.media.c2@1.0-service
 vendor/bin/vppservice
 vendor/etc/configstore/vpp.configstore.xml
