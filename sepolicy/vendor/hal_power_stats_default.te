@@ -1,9 +1,10 @@
 type sysfs_iio, fs_type, sysfs_type;
 type sysfs_power_stats_ignore, sysfs_type, fs_type;
+allow hal_power_stats_default sysfs:dir r_dir_perms;
 allow hal_power_stats_default vendor_sysfs_iio:dir r_dir_perms;
 allow hal_power_stats_default vendor_sysfs_iio:file r_file_perms;
 allow hal_power_stats_default sysfs_iio:lnk_file read;
-allow hal_power_stats_default sysfs:file { read };
+allow hal_power_stats_default sysfs:file r_file_perms;
 r_dir_file(hal_power_stats_default, sysfs_power_stats)
 
 dontaudit hal_power_stats_default sysfs_power_stats_ignore:dir r_dir_perms;
