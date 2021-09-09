@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2018-2020 The LineageOS Project
+# Copyright (C) 2018-2021 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -24,7 +24,7 @@ source "${HELPER}"
 setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" true
 
 # Warning headers and guards
-write_headers "davinci phoenix violet"
+write_headers "davinci phoenix violet mojito"
 
 # The standard common blobs
 write_makefiles "${MY_DIR}/proprietary-files.txt" true
