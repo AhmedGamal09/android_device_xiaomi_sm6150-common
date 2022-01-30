@@ -38,7 +38,7 @@ import org.lineageos.settings.R;
 import java.io.IOException;
 
 public class ClearSpeakerFragment extends PreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+        OnMainSwitchChangeListener {
 
     private static final String TAG = ClearSpeakerFragment.class.getSimpleName();
 
@@ -47,7 +47,7 @@ public class ClearSpeakerFragment extends PreferenceFragment implements
     private AudioManager mAudioManager;
     private Handler mHandler;
     private MediaPlayer mMediaPlayer;
-    private SwitchPreference mClearSpeakerPref;
+    private MainSwitchPreference mClearSpeakerSwitchBar;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

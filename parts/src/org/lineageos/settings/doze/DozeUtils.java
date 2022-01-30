@@ -54,7 +54,7 @@ public final class DozeUtils {
     }
 
     public static void checkDozeService(Context context) {
-        if (isDozeEnabled(context) && !isAlwaysOnEnabled(context) && sensorsEnabled(context)) {
+        if (isDozeEnabled(context) && !isAlwaysOnEnabled(context)) {
             startService(context);
         } else {
             stopService(context);

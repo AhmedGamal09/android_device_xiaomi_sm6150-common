@@ -22,6 +22,7 @@ import android.app.Service;
 import android.app.TaskStackListener;
 import android.app.IActivityManager;
 import android.app.IActivityTaskManager;
+import android.app.ActivityTaskManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -41,6 +42,7 @@ public class ThermalService extends Service {
     private IActivityManager mIActivityManager;
 
     private IActivityTaskManager mActivityTaskManager;
+
 
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
