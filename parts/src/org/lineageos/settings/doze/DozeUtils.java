@@ -36,7 +36,7 @@ public final class DozeUtils {
     protected static final String CATEG_PICKUP_SENSOR = "pickup_sensor";
     protected static final String GESTURE_PICK_UP_KEY = "gesture_pick_up";
     protected static final String DOZE_ENABLE = "doze_enable";
-    
+
     private static final String TAG = "DozeUtils";
     private static final boolean DEBUG = false;
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
@@ -102,6 +102,5 @@ public final class DozeUtils {
 
     public static boolean isPickUpEnabled(Context context) {
         return isGestureEnabled(context, GESTURE_PICK_UP_KEY);
-    }
     }
 }

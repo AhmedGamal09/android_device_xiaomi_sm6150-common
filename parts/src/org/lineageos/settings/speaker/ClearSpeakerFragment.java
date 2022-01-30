@@ -26,10 +26,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Switch;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
+
+import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import org.lineageos.settings.R;
 
@@ -51,28 +53,21 @@ public class ClearSpeakerFragment extends PreferenceFragment implements
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.clear_speaker_settings);
 
-        mClearSpeakerPref = (SwitchPreference) findPreference(PREF_CLEAR_SPEAKER);
-        mClearSpeakerPref.setOnPreferenceChangeListener(this);
+        mClearSpeakerSwitchBar = (MainSwitchPreference) findPreference(PREF_CLEAR_SPEAKER);
+        mClearSpeakerSwitchBar.addOnSwitchChangeListener(this);
 
         mHandler = new Handler();
         mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mClearSpeakerPref) {
-            boolean value = (Boolean) newValue;
-            if (value) {
-                if (startPlaying()) {
-                    mHandler.removeCallbacksAndMessages(null);
-                    mHandler.postDelayed(() -> {
-                        stopPlaying();
-                    }, 30000);
-                    return true;
-                }
-            }
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (isChecked && startPlaying()) {
+            mHandler.removeCallbacksAndMessages(null);
+            mHandler.postDelayed(() -> {
+                stopPlaying();
+            }, 30000);
         }
-        return false;
     }
 
     @Override
@@ -94,7 +89,7 @@ public class ClearSpeakerFragment extends PreferenceFragment implements
             } finally {
                 file.close();
             }
-            mClearSpeakerPref.setEnabled(false);
+            mClearSpeakerSwitchBar.setEnabled(false);
             mMediaPlayer.setVolume(1.0f, 1.0f);
             mMediaPlayer.prepare();
             mMediaPlayer.start();
@@ -112,7 +107,7 @@ public class ClearSpeakerFragment extends PreferenceFragment implements
             mMediaPlayer.release();
         }
         mAudioManager.setParameters("status_earpiece_clean=off");
-        mClearSpeakerPref.setEnabled(true);
-        mClearSpeakerPref.setChecked(false);
+        mClearSpeakerSwitchBar.setEnabled(true);
+        mClearSpeakerSwitchBar.setChecked(false);
     }
 }
