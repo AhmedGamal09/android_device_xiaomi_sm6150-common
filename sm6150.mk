@@ -351,10 +351,6 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/packages/apps/Car
 PRODUCT_PACKAGES += \
     libqti-perfd-client
 
-# Lineage Health
-PRODUCT_PACKAGES += \
-    vendor.lineage.health-service.default
-
 # Power
 PRODUCT_PACKAGES += \
 		android.hardware.power@1.2 \
